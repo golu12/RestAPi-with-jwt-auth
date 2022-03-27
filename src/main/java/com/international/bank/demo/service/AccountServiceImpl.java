@@ -54,16 +54,16 @@ public class AccountServiceImpl implements AccountService {
     public Optional<Client> searchAndCreateCurrentAccount(int custId, double initialCredit) {
         Client client = null;
         Account account = null;
-        try{
-        List<Client> existingAccountDetails = clientRepository.getCustomerRecord(custId);
-        if(!existingAccountDetails.get(0).getAccounts().get(0).getAccountNumber().isEmpty()){
-	    client = createRequest(existingAccountDetails,initialCredit,account,client);
-            return addSavingsAccount(client);
-        }
+        	try{
+        		List<Client> existingAccountDetails = clientRepository.getCustomerRecord(custId);
+        		if(!existingAccountDetails.get(0).getAccounts().get(0).getAccountNumber().isEmpty()){
+	    		client = createRequest(existingAccountDetails,initialCredit,account,client);
+            		return addSavingsAccount(client);
+        	}
 
-        }catch(ResourceNotFoundException e){
-         LOG.error("Error while creating current account", e.getMessage());
-        }
+        	}catch(ResourceNotFoundException e){
+         		LOG.error("Error while creating current account", e.getMessage());
+        	}
         return Optional.empty();
     }
 
